@@ -8,12 +8,10 @@ $pdo = new PDO($dsn, 'root', '');
         width: 70%;
         min-width: 800px;
     }
-
     td {
         border: 1px solid lightblue;
         padding: 5px 8px;
     }
-
     .btn {
         border: 1px solid lightblue;
         padding: 10px 15px;
@@ -28,13 +26,12 @@ $pdo = new PDO($dsn, 'root', '');
         position: relative;
         transition: all 0.5S;
     }
-
     a.btn:hover{
         text-decoration: underline;
         background-color: skyblue;
         /* transform: scale(1.1); */
         /* 放大 */
-        top:-10px;
+        top:-5px;
         position: relative;
         transition: all 2s;
     }
@@ -60,6 +57,7 @@ $pdo = new PDO($dsn, 'root', '');
     <?php
     $sql = "select * from students order by id desc";
     $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    // 使用 PDO 建立的物件變數來進行各項資料庫存取的操作，以key值來回傳資料↑
     foreach ($rows as $row) {
     ?>
         <tr>
@@ -74,10 +72,10 @@ $pdo = new PDO($dsn, 'root', '');
             <td><?= $row['telphone']; ?></td>
             <td><?= $row['major']; ?></td>
             <td><?= $row['secondary']; ?></td>
-            <td>編輯</td>
+            <td><a href='edit_form.php?id=<?= $row['id']; ?>'>編輯</a></td>
+            <td><a href='del.php?id=<?= $row['id']; ?>'>刪除</a></td>
             <!-- <td><a href="#" onclick="alert('確定要刪除嗎?')">刪除</a> </td> -->
             <!-- <td><a href="#" onclick="confirm('確定要刪除嗎?')">刪除</a> </td> -->
-            <td><a href='del.php?id=<?= $row['id']; ?>'>刪除</a></td>
         </tr>
     <?php
     }
